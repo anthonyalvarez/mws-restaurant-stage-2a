@@ -1,4 +1,4 @@
-const CACHE_NAME = 'A';
+const CACHE_NAME = 'B';
 const URLS_TO_CACHE = [
   '/',
   'index.html',
@@ -38,7 +38,16 @@ const URLS_TO_CACHE = [
   '/img/7-sm.jpg',
   '/img/8-sm.jpg',
   '/img/9-sm.jpg',
-  '/img/10-sm.jpg'
+  '/img/10-sm.jpg',
+  'manifest.json',
+  '/img/icons-128.png',
+  '/img/icons-144.png',
+  '/img/icons-192.png',
+  '/img/icons-256.png',
+  '/img/icons-384.png',
+  '/img/icons-48.png',
+  '/img/icons-512.png',
+  '/img/icons-96.png'
 ];
 
 /**
