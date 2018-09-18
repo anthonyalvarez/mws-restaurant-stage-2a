@@ -1,4 +1,5 @@
-const CACHE_NAME = 'B';
+const CONSOLE_LOG_ID = '[SERVICE-WORKER]';
+const CACHE_NAME = 'C';
 const URLS_TO_CACHE = [
   '/',
   'index.html',
@@ -57,13 +58,17 @@ const URLS_TO_CACHE = [
  */
 
 self.addEventListener('install', function(evt) {
-  console.log('[SERVICE-WORKER] Install ');
+  let FUCNTION_ID = ' id #1 ';
+  let FUCNTION_DESC = 'Install event';
+  console.log(CONSOLE_LOG_ID + FUCNTION_ID + FUCNTION_DESC);
   evt.waitUntil(precache());
 });
 
 function precache() {
+  let FUCNTION_ID = ' id #2 ';
+  let FUCNTION_DESC = 'Precache to cache name';
+  console.log(CONSOLE_LOG_ID + FUCNTION_ID + FUCNTION_DESC, CACHE_NAME);
   return caches.open(CACHE_NAME).then(function (cache) {
-    console.log('[SERVICE-WORKER] PreCache');
     return cache.addAll(URLS_TO_CACHE);
   });
 }
@@ -87,14 +92,16 @@ function precache() {
  */
 
 self.addEventListener('activate', e => {
+  let FUCNTION_ID = ' id #3 ';
+  let FUCNTION_DESC = 'Activate Event to cache name';
   e.waitUntil(
     caches.keys().then(keyList => {
       return Promise.all(keyList.map(key => {
         if (key !== CACHE_NAME) return caches.delete(key);
       }));
     }));
-  console.log('[SERVICE-WORKER] Activate');
   // return self.clients.claim();
+  console.log(CONSOLE_LOG_ID + FUCNTION_ID + FUCNTION_DESC, CACHE_NAME);
 });
 
 /**
@@ -113,15 +120,29 @@ self.addEventListener('activate', e => {
 // });
 
 self.addEventListener('fetch', function(evt) {
-  console.log('[SERVICE-WORKER] fetch', evt.request);
- evt.respondWith(fromCache(evt.request));
-  evt.waitUntil(update(evt.request));
-});
+  let FUCNTION_ID = ' id #4 ';
+  let FUCNTION_DESC = 'Fetch Event';
+  // const DO_NOT_CACHE_LIST_A = 'browser-sync';
+  // const DO_NOT_CACHE_LIST_B = 'chrome-extension';
+  // if evt.request is on DO_NOT_FETCH_LIST then return fetch(event.request);
+  // const S = evt.request.url;
+  // const contains = DO_NOT_CACHE_LIST_A.contains(S) || DO_NOT_CACHE_LIST_B.contains(S);
+  // console.log(CONSOLE_LOG_ID + FUCNTION_ID + FUCNTION_DESC + 'Contains', contains);
+  // S.includes(DO_NOT_CACHE_LIST);
+  // if (contains === true) { 
+    evt.respondWith(fromCache(evt.request));
+        evt.waitUntil(update(evt.request));
+        console.log(CONSOLE_LOG_ID + FUCNTION_ID + FUCNTION_DESC + 'Cache' , evt.request.url);
+    // } else {
+      // console.log(CONSOLE_LOG_ID + FUCNTION_ID + FUCNTION_DESC + 'Cloud' , S, contains);
+      // return fetch(evt.request);
+          
+    });
 
 function fromCache(request) {
   return caches.open(CACHE_NAME).then(function (cache) {
     return cache.match(request).then(function (matching) {
-      console.log('[SERVICE-WORKER] fromCache', request);
+      console.log('[SERVICE-WORKER] from Cache', request.url);
       return matching || Promise.reject('no-match');
     });
   });
@@ -130,8 +151,23 @@ function fromCache(request) {
 function update(request) {
   return caches.open(CACHE_NAME).then(function (cache) {
     return fetch(request).then(function (response) {
-      console.log('[SERVICE-WORKER] Update cache', response);
-      return cache.put(request, response);
+      var newRequest = request.clone();
+      console.log('[SERVICE-WORKER] Update cache', newRequest.url);
+      // do not fetch browser-sync
+      // condition ? expr1 : expr2 
+      // if Response.url does not contain "browser-sync", then cache.put
+      // 
+     
+/*       if (contains === true) { 
+        const S = response.url;
+        const contains = S.includes('browser-sync');
+        console.log('browser-sync exist', S);
+        
+      } else {
+        console.log('does not exist', S);
+        return cache.put(request, response);
+      }
+ */      // return cache.put(request, response);
     });
   });
 }

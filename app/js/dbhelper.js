@@ -1,3 +1,4 @@
+const CONSOLE_LOG_ID = '[DB-HELPER]';
 /**
  * Common database helper functions.
  */
@@ -20,7 +21,7 @@ class DBHelper {
    * Change this to restaurants.json file location on your server.
    */
   static get DATABASE_URL() {
-    const port = 9000; // Change this to your server port
+    const port = 2001; // Change this to your server port
     return `http://localhost:${port}/data/restaurants.json`;
     // return `http://localhost:${port}/restaurants`;
   }
@@ -29,6 +30,8 @@ class DBHelper {
    * Fetch all restaurants.
    */
   static fetchRestaurants(callback) {
+    let FUCNTION_ID = ' id #1 ';
+    let FUCNTION_DESC = 'fetchRestaurants';
     let xhr = new XMLHttpRequest();
     xhr.open('GET', DBHelper.DATABASE_URL);
     xhr.onload = () => {
@@ -181,6 +184,21 @@ class DBHelper {
     marker.addTo(newMap);
     return marker;
   }
+
+  static addRestaurantsIdb() {
+    const REMOTEPORT = 1337; // Change this to your server port
+    return `http://localhost:${port}/restaurants`;
+    // Fetch data from remote server
+    // Put data into an array or object
+    // Create transaction 
+    // go through data and place in IDB
+    // dbPromise.then(function(db) {
+    //   var tx = db.transaction('products', 'readwrite');
+    //   var store = tx.objectStore('products');
+  // });
+}
+
+
   /* static mapMarkerForRestaurant(restaurant, map) {
     const marker = new google.maps.Marker({
       position: restaurant.latlng,
