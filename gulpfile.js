@@ -5,11 +5,20 @@ const browserSync = require('browser-sync').create();
 const del = require('del');
 const wiredep = require('wiredep').stream;
 const runSequence = require('run-sequence');
+const connect = require('gulp-connect');
 
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
 
 let dev = true;
+
+gulp.task('connectDev', function() {
+  connect.server({
+    name: 'Dev App',
+    root: 'app',
+    port: 2001,
+  });
+});
 
 gulp.task('styles', () => {
   return gulp.src('app/styles/*.css')
