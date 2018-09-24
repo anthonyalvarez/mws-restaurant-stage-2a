@@ -1,5 +1,7 @@
-# Product Name
-mws-restaurant-stage-2a
+# mws-restaurant-stage-2a
+ - JSON data driven New York City (NYC) restaurant review website.
+
+- Shows interactive street map of 10 restaurants located with NYC's 5 boroughs.
 
 ## Table of Contents
 
@@ -19,7 +21,7 @@ The core functionality of the application will not change for this stage. Only t
 
 For the Restaurant Reviews projects, you will incrementally convert a static webpage to a mobile-ready web application. In Stage Two, you will take the responsive, accessible design you built in Stage One and connect it to an external JSON REST API server.
 
-1. Use asynchronous JavaScript to request JSON data from the server. 
+1. Use asynchronous JavaScript to request JSON data from the server.
 
 2. Store data received from the server in an offline database using IndexedDB, which will create an app shell architecture.
 
@@ -33,11 +35,11 @@ Use server data instead of local memory In the first version of the application,
 
 Use IndexedDB to cache JSON responses In order to maintain offline use with the development server you will need to update the service worker to store the JSON received by your requests using the IndexedDB API. As with Stage One, any page that has been visited by the user should be available offline, with data pulled from the shell database.
 
-Meet the minimum performance requirements Once you have your app working with the server and working in offline mode, you’ll need to measure your site performance using Lighthouse. 
+Meet the minimum performance requirements Once you have your app working with the server and working in offline mode, you’ll need to measure your site performance using Lighthouse.
 
 Lighthouse measures performance in four areas, but your review will focus on three:
 
-1. Progressive Web App score should be at 90 or better. 
+1. Progressive Web App score should be at 90 or better.
 1. Performance score should be at 70 or better.
 1. Accessibility score should be at 90 or better.
 
@@ -45,27 +47,47 @@ You can audit your site's performance with Lighthouse by using the Audit tab of 
 
 ### Technology
 
+#### JavaScript
+
 * Progessive Web App (PWA)
-* Responsive Web Design (RWD)
-* Responsive Images
+* Service Worker
 * ES6 / JavaScript 2015
-* JavaScript Module bundling
 * JavaScript Source Maps
+* JavaScript Linting
 * File Minification
 * File Uglification
-* Cross Browser Testing
-* Grunt
-* Gulp
 * Indexed DB (IDB)
-* Yeoman Web App Generator
-* Bower Components
 * Fetch API
 * Cache API
 * JSON REST API
-* eslint
-* Node
-* NPM
-* Lighthouse
+* node
+* npm
+
+#### HTML
+* Responsive Images
+* HTML5 Landmarks
+* ARIA A11y web accessibility
+
+#### CSS
+
+* Responsive Web Design (RWD)
+* Cross Browser Testing
+
+#### Build Tools
+
+* Grunt
+* Gulp
+* Yeoman Web App Generator
+* Bower Components
+* [Lighthouse Web Auditing](https://developers.google.com/web/tools/lighthouse/)
+* ES6 / JavaScript 2015 Module bundling
+
+#### Style Guide Compliance
+
+* [HTML](http://udacity.github.io/frontend-nanodegree-styleguide/index.html)
+* [CSS](http://udacity.github.io/frontend-nanodegree-styleguide/css.html)
+* [JavaScript](http://udacity.github.io/frontend-nanodegree-styleguide/javascript.html)
+* [Git](https://udacity.github.io/git-styleguide/)
 
 ***[Back to top](#table-of-contents)***
 
@@ -79,8 +101,8 @@ What things you need to install the software and how to install them
 
 ```
 node
-NPM
-Git
+npm
+git
 ```
 
 ### Dependencies
@@ -92,28 +114,42 @@ npm install
 bower install
 gulp serve
 ```
-### API Reference
-TODO: Write API Reference
+### Local Development API Server
+1. [Fork and clone the server repository](https://github.com/udacity/mws-restaurant-stage-2). You’ll use this development server to develop your project code.
+1. Change the data source for your restaurant requests to pull JSON from the server, parse the response and use the response to generate the site UI.
+1. Cache the JSON responses for offline use by using the IndexedDB API.
 
-### Usage
-TODO: Write usage instructions
+#### Get Restaurants
+```
+curl "http://localhost:1337/restaurants"
+```
+#### Get Restaurants by id
+````
+curl "http://localhost:1337/restaurants/{3}"
+````
+#### Architecture
+Local server
+- Node.js
+- Sails.js
+
+#### Usage
+##### Start the server
+```Start server
+# node server
+```
+##### You should now have access to your API server environment
+debug: Environment : development
+
+debug: Port        : 1337
 
 ## Versioning
 
  Using [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/anthonyalvarez/mws-restaurant-stage-2a/tags).
 
-* 0.2.1
-    * CHANGE: Update docs (module code remains unchanged)
-* 0.2.0
-    * CHANGE: Remove `setDefaultXYZ()`
-    * ADD: Add `init()`
-* 0.1.1
-    * FIX: Crash when calling `baz()` (Thanks @GenerousContributorName!)
-* 0.1.0
-    * The first proper release
-    * CHANGE: Rename `foo()` to `bar()`
+For list of the changes and updates, see the [commits on this repository](https://github.com/anthonyalvarez/mws-restaurant-stage-2a/commits).
+
 * 0.0.1
-    * Work in progress
+    * Work in  Need to populate Local Indexed DB with Remote JSON API server using fetch API.
 
 ***[Back to top](#table-of-contents)***
 
@@ -133,6 +169,9 @@ Open source
 **[Back to top](#table-of-contents)**
 
 ## Contact
+If you find a bug in the source code or a mistake in the documentation, you can help us by
+submitting an issue to [GitHub](https://github.com/anthonyalvarez/mws-restaurant-stage-2a/issues). Even better you can submit a Pull Request with a fix :)
+
 - Anthony E. Alvarez – [My GitHub](https://github.com/anthonyalvarez/)
 - Twitter: [@AnthonyEAlvarez](https://twitter.com/AnthonyEAlvarez)
 
