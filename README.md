@@ -72,6 +72,7 @@ You can audit your site's performance with Lighthouse by using the Audit tab of 
 
 * Responsive Web Design (RWD)
 * Cross Browser Testing
+* Live Editing
 
 #### Build Tools
 
@@ -81,6 +82,9 @@ You can audit your site's performance with Lighthouse by using the Audit tab of 
 * Bower Components
 * [Lighthouse Web Auditing](https://developers.google.com/web/tools/lighthouse/)
 * ES6 / JavaScript 2015 Module bundling
+* Chrome DevTools
+* VS Code
+* Web Server Live Reloading
 
 #### Style Guide Compliance
 
