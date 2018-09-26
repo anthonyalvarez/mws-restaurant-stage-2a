@@ -198,26 +198,25 @@ class DBHelper {
     // Fetch data from remote server
     // Put data into an array or object
     fetch(DBHelper.REMOTE_DATABASE_URL).then(response => {return response.json(); }).then(restaurants => {
-      console.trace('[addRestaurantsIdb Trace]', restaurants); 
-/*       dbPromise.then(function(db) {
+      console.trace('[addRestaurantsIdb Trace]', restaurants);
+       dbPromise.then(function(db) {
         var transaction = db.transaction('restaurants', 'readwrite');
-        var store = transaction.objectStore('restaurants');
-        restaurants.forEach(function (restaurant, index) {
-          store.put(restaurant, index + 1);
-        });
+        var objstore = transaction.objectStore('restaurants');
+        for ( let i = 0; i < restaurants.length; i++) {
+          objstore.put(restaurants[i]);
+      }
         return transaction.complete;
       });
- */      
     })
     .catch (error => {
       console.trace('[addRestaurantsIdb Trace Error]', error);
     });
-  
+
 /*     var remoteData = restaurants;
     console.log('[remoteData]', remoteData);
     console.log('[remoteData]', restaurants);
  */
-    // Create transaction 
+    // Create transaction
     // go through data and place in IDB
   }
 

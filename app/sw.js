@@ -7,6 +7,8 @@ const URLS_TO_CACHE = [
   'index.html',
   'restaurant.html',
   'serviceworker.js',
+  'sw.js',
+  '/js/idb.js',
   '/js/dbhelper.js',
   '/js/main.js',
   '/js/restaurant_info.js',
