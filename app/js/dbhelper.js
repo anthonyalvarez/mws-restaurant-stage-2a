@@ -1,4 +1,4 @@
-const CONSOLE_LOG_ID = '[DB-HELPER]';
+var CONSOLE_LOG_ID = '[DB-HELPER]';
 /**
  * Common database helper functions.
  */
@@ -21,9 +21,15 @@ class DBHelper {
    * Change this to restaurants.json file location on your server.
    */
   static get DATABASE_URL() {
-    const port = 2001; // Change this to your server port
+    const port = 9000; // Change this to your server port
     return `http://localhost:${port}/data/restaurants.json`;
-    // return `http://localhost:${port}/restaurants`;
+
+  }
+
+  static get REMOTE_DATABASE_URL() {
+    const port = 1337; // Change this to your server port
+    return `http://localhost:${port}/restaurants`;
+
   }
 
   /**
@@ -36,10 +42,12 @@ class DBHelper {
     xhr.open('GET', DBHelper.DATABASE_URL);
     xhr.onload = () => {
       if (xhr.status === 200) { // Got a success response from server!
-        console.log('[fetchRestaurants] Success response from Sails.js server' );
+        // console.log('[fetchRestaurants] Success response from Sails.js server' );
         const json = JSON.parse(xhr.responseText);
         const restaurants = json.restaurants;
-        console.log('[fetchRestaurants]', restaurants);
+        console.log('[fetchRestaurants Log]', restaurants);
+        console.trace('[fetchRestaurants Trace]', restaurants);
+        // console.table('[fetchRestaurants Table]', restaurants);
         callback(null, restaurants);
       } else { // Oops!. Got an error from server.
         const error = (`Request failed. Returned status of ${xhr.status}`);
@@ -47,6 +55,7 @@ class DBHelper {
       }
     };
     xhr.send();
+    // DBHelper.addRestaurantsIdb();
   }
 
   /**
@@ -186,18 +195,31 @@ class DBHelper {
   }
 
   static addRestaurantsIdb() {
-    const REMOTEPORT = 1337; // Change this to your server port
-    return `http://localhost:${port}/restaurants`;
     // Fetch data from remote server
     // Put data into an array or object
+    fetch(DBHelper.REMOTE_DATABASE_URL).then(response => {return response.json(); }).then(restaurants => {
+      console.trace('[addRestaurantsIdb Trace]', restaurants); 
+/*       dbPromise.then(function(db) {
+        var transaction = db.transaction('restaurants', 'readwrite');
+        var store = transaction.objectStore('restaurants');
+        restaurants.forEach(function (restaurant, index) {
+          store.put(restaurant, index + 1);
+        });
+        return transaction.complete;
+      });
+ */      
+    })
+    .catch (error => {
+      console.trace('[addRestaurantsIdb Trace Error]', error);
+    });
+  
+/*     var remoteData = restaurants;
+    console.log('[remoteData]', remoteData);
+    console.log('[remoteData]', restaurants);
+ */
     // Create transaction 
     // go through data and place in IDB
-    // dbPromise.then(function(db) {
-    //   var tx = db.transaction('products', 'readwrite');
-    //   var store = tx.objectStore('products');
-  // });
-}
-
+  }
 
   /* static mapMarkerForRestaurant(restaurant, map) {
     const marker = new google.maps.Marker({

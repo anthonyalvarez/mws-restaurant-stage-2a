@@ -1,5 +1,7 @@
-const CONSOLE_LOG_ID = '[SERVICE-WORKER]';
+var CONSOLE_LOG_ID = '[SERVICE-WORKER]';
 const CACHE_NAME = 'C';
+const CACHE_DYNAMIC_NAME = 'C';
+CACHE_CONTAINING_ERROR_MESSAGES = 'Z';
 const URLS_TO_CACHE = [
   '/',
   'index.html',
@@ -118,7 +120,7 @@ self.addEventListener('activate', e => {
 //     })
 //   );
 // });
-
+/*
 self.addEventListener('fetch', function(evt) {
   let FUCNTION_ID = ' id #4 ';
   let FUCNTION_DESC = 'Fetch Event';
@@ -129,15 +131,42 @@ self.addEventListener('fetch', function(evt) {
   // const contains = DO_NOT_CACHE_LIST_A.contains(S) || DO_NOT_CACHE_LIST_B.contains(S);
   // console.log(CONSOLE_LOG_ID + FUCNTION_ID + FUCNTION_DESC + 'Contains', contains);
   // S.includes(DO_NOT_CACHE_LIST);
-  // if (contains === true) { 
+  // if (contains === true) {
     evt.respondWith(fromCache(evt.request));
         evt.waitUntil(update(evt.request));
         console.log(CONSOLE_LOG_ID + FUCNTION_ID + FUCNTION_DESC + 'Cache' , evt.request.url);
     // } else {
       // console.log(CONSOLE_LOG_ID + FUCNTION_ID + FUCNTION_DESC + 'Cloud' , S, contains);
       // return fetch(evt.request);
-          
+
     });
+ */
+
+ self.addEventListener('fetch', function(event) {
+  event.respondWith(
+    caches.match(event.request)
+      .then(function(response) {
+        if (response) {
+          return response;     // if valid response is found in cache return it
+        } else {
+          return fetch(event.request)     //fetch from internet
+            .then(function(res) {
+              return caches.open(CACHE_DYNAMIC_NAME)
+                .then(function(cache) {
+                  cache.put(event.request.url, res.clone());    //save the response for future
+                  return res;   // return the fetched data
+                })
+            })
+            .catch(function(err) {       // fallback mechanism
+              return caches.open(CACHE_CONTAINING_ERROR_MESSAGES)
+                .then(function(cache) {
+                  return cache.match('/offline.html');
+                });
+            });
+        }
+      })
+  );
+});
 
 function fromCache(request) {
   return caches.open(CACHE_NAME).then(function (cache) {
@@ -154,15 +183,15 @@ function update(request) {
       var newRequest = request.clone();
       console.log('[SERVICE-WORKER] Update cache', newRequest.url);
       // do not fetch browser-sync
-      // condition ? expr1 : expr2 
+      // condition ? expr1 : expr2
       // if Response.url does not contain "browser-sync", then cache.put
-      // 
-     
-/*       if (contains === true) { 
+      //
+
+/*       if (contains === true) {
         const S = response.url;
         const contains = S.includes('browser-sync');
         console.log('browser-sync exist', S);
-        
+
       } else {
         console.log('does not exist', S);
         return cache.put(request, response);
