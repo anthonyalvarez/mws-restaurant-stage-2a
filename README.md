@@ -51,15 +51,11 @@ You can audit your site's performance with Lighthouse by using the Audit tab of 
 
 * Progessive Web App (PWA)
 * Service Worker
-* ES6 / JavaScript 2015
-* JavaScript Source Maps
-* JavaScript Linting
-* File Minification
-* File Uglification
 * Indexed DB (IDB)
 * Fetch API
 * Cache API
 * JSON REST API
+* Sails.js Server
 * node
 * npm
 
@@ -85,6 +81,14 @@ You can audit your site's performance with Lighthouse by using the Audit tab of 
 * Chrome DevTools
 * VS Code
 * Web Server Live Reloading
+* ES6 / JavaScript 2015 Transpiling
+* JavaScript Source Maps
+* JavaScript Linting
+* File Minification
+* File Uglification
+* git
+* github.com
+* Cmder
 
 #### Style Guide Compliance
 
