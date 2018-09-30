@@ -38,24 +38,18 @@ class DBHelper {
   static fetchRestaurants(callback) {
     let FUCNTION_ID = ' id #1 ';
     let FUCNTION_DESC = 'fetchRestaurants';
-    let xhr = new XMLHttpRequest();
-    xhr.open('GET', DBHelper.DATABASE_URL);
-    xhr.onload = () => {
-      if (xhr.status === 200) { // Got a success response from server!
-        // console.log('[fetchRestaurants] Success response from Sails.js server' );
-        const json = JSON.parse(xhr.responseText);
-        const restaurants = json.restaurants;
-        console.log('[fetchRestaurants Log]', restaurants);
-        console.trace('[fetchRestaurants Trace]', restaurants);
-        // console.table('[fetchRestaurants Table]', restaurants);
-        callback(null, restaurants);
-      } else { // Oops!. Got an error from server.
-        const error = (`Request failed. Returned status of ${xhr.status}`);
-        callback(error, null);
-      }
-    };
-    xhr.send();
-    // DBHelper.addRestaurantsIdb();
+    fetch(DBHelper.REMOTE_DATABASE_URL)
+      .then(response => {
+        return response.json(); 
+      })
+      .then(restaurants => {
+          console.log(FUCNTION_ID, FUCNTION_DESC, '#1', restaurants);
+          callback(null, restaurants);  
+        })
+      .catch (error => {
+          console.log(FUCNTION_ID, FUCNTION_DESC, error);
+        });
+      console.log(FUCNTION_ID, FUCNTION_DESC,'#2', restaurants);
   }
 
   /**

@@ -12,7 +12,6 @@ const URLS_TO_CACHE = [
   '/js/dbhelper.js',
   '/js/main.js',
   '/js/restaurant_info.js',
-  '/data/restaurants.json',
   '/css/styles.css',
   '/img/1.jpg',
   '/img/2.jpg',
