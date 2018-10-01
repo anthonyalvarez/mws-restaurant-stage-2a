@@ -1,6 +1,6 @@
 var CONSOLE_LOG_ID = '[SERVICE-WORKER]';
-const CACHE_NAME = 'C';
-const CACHE_DYNAMIC_NAME = 'C';
+const CACHE_NAME = 'D';
+const CACHE_DYNAMIC_NAME = 'D';
 CACHE_CONTAINING_ERROR_MESSAGES = 'Z';
 const URLS_TO_CACHE = [
   '/',

@@ -98,14 +98,14 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   image.className = 'restaurant-img';
   // image.src = DBHelper.imageUrlForRestaurant(restaurant);
   const FILENAME = DBHelper.imageUrlForRestaurant(restaurant);
-  let fileName = FILENAME.slice (0, -4);
-  let fileSmall = fileName + '-sm.jpg 270w';
-  let fileMedium = fileName + '-med.jpg 540w, ';
-  let fileLarge = FILENAME;
+  // let fileName = FILENAME.slice (0, -4);
+  let fileSmall = FILENAME + '-sm.jpg 270w';
+  let fileMedium = FILENAME + '-med.jpg 540w, ';
+  let fileLarge = FILENAME + '.jpg' ;
   let sourceSet = fileLarge + ' 800w, ' + fileMedium + fileSmall;
   // console.log('srcset' + sourceSet);
-  
-  image.src = fileName + '-sm.jpg';
+
+  image.src = FILENAME + '-sm.jpg';
   image.setAttribute('srcset', sourceSet);
   image.alt = restaurant.name;
 

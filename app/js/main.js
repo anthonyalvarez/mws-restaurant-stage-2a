@@ -184,12 +184,12 @@ createRestaurantHTML = (restaurant) => {
   image.className = 'restaurant-img';
   // image.src = DBHelper.imageUrlForRestaurant(restaurant);
   const FILENAME = DBHelper.imageUrlForRestaurant(restaurant);
-  let fileName = FILENAME.slice (0, -4);
-  let fileSmall = fileName + '-sm.jpg 1x';
-  let fileLarge = fileName + '-med.jpg 2x, ';
+  // let fileName = FILENAME.slice (0, -4);
+  let fileSmall = FILENAME + '-sm.jpg 1x';
+  let fileLarge = FILENAME + '-med.jpg 2x, ';
   let sourceSet = fileLarge + fileSmall;
   // console.log('Filenames are ' + fileSmall + ' and ' + fileLarge + 'srcset: ' + sourceSet);
-  image.src = fileName + '-sm.jpg';
+  image.src = FILENAME + '-sm.jpg';
   image.setAttribute('srcset', sourceSet);
   image.alt = restaurant.name;
   li.append(image);
